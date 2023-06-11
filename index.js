@@ -27,4 +27,20 @@ client.on('ready', async () => {
   console.log(`${client.user.tag} is ready!`);
 });
 
+function send(content){
+  try{
+    client.channels.cache.get(log_ch_id).send(content)
+  }catch(err){
+    console.error(`ERROR[${err.toString()}]\n${err.stack}`)
+  }
+}
+
+client.on("messageDelete", async message => {
+  if(message.channel.type != "DM"){
+    send(`**[Message Deleted]**\n>>> Message Content:${message.content}/${message.id}\nMessage Author:${message.author.tag}/${message.author.id}/${message.author.toString()}\nMessage Channel:${message.channel.name}/${message.channel.id}/${message.channel.toString()}\nMessage Guild:${message.guild.name}/${message.guild.id}/${message.guild.toString()}`)
+  }else{
+    send("test")
+  }
+})
+
 client.login(process.env.DISCORD_BOT_TOKEN)
