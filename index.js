@@ -23,4 +23,8 @@ if (process.env.DISCORD_BOT_TOKEN == undefined) {
   process.exit(0)
 }
 
+client.on('ready', async () => {
+  console.log(`${client.user.tag} is ready!`);
+});
+
 client.login(process.env.DISCORD_BOT_TOKEN)
