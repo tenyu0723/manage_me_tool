@@ -5,7 +5,8 @@ const db = new Keyv(`sqlite://db.sqlite`, { table: "database" });
 const client = new Client({
   partials: ["CHANNEL"],
   intents: new Intents(32767),
-  restTimeOffset: -1000
+  restTimeOffset: -1000,
+  checkUpdate: false
 });
 const config = require("./config.json")
 const prefix = config.prefix
@@ -37,7 +38,7 @@ function send(content){
 
 client.on("messageDelete", async message => {
   if(message.channel.type != "DM"){
-    send(`**[Message Deleted]**\n>>> Message Content:${message.content}/${message.id}\nMessage Author:${message.author.tag}/${message.author.id}/${message.author.toString()}\nMessage Channel:${message.channel.name}/${message.channel.id}/${message.channel.toString()}\nMessage Guild:${message.guild.name}/${message.guild.id}/${message.guild.toString()}`)
+    send(`**[Message Deleted]**\n>>> Message Content:${message.content}/${message.id}\nMessage Author:${message.author.tag}/${message.author.id}\nMessage Channel:${message.channel.name}/${message.channel.id}/${message.channel.toString()}\nMessage Guild:${message.guild.name}/${message.guild.id}`)
   }else{
     send("test")
   }
